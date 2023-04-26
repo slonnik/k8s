@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitlab
+  namespace: gitlab
+  labels:
+    app: gitlab  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitlab
+  template:
+    metadata:
+      labels:
+        app: gitlab
+    spec:
+      volumes:
+      - name: gitlab-pv-storage-data
+        persistentVolumeClaim:
+          claimName: gitlab-pv-claim-data
+      - name: gitlab-pv-storage-logs
+        persistentVolumeClaim:
+          claimName: gitlab-pv-claim-logs
+      - name: gitlab-pv-storage-config
+        persistentVolumeClaim:
+          claimName: gitlab-pv-claim-config
+      containers:
+      - name: gitlab
+        image: gitlab/gitlab-ce:latest
+        #hostname: gitlab.slonnik.site
+        env:
+          - name: GITLAB_OMNIBUS_CONFIG
+            value: "external_url 'https://gitlab.slonnik.site';gitlab_rails['registry_enabled'] = true;gitlab_rails['initial_root_password'] = \"thas-ich-a\""
+       
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        - containerPort: 5000  
+        volumeMounts:
+        - mountPath: "/etc/gitlab"
+          name: gitlab-pv-storage-config
+        - mountPath: "/var/log/gitlab"
+          name: gitlab-pv-storage-logs
+        - mountPath: "var/opt/gitlab"
+          name: gitlab-pv-storage-data

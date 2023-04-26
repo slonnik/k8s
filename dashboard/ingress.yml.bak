@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  namespace: kube-system
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts: 
+    - slonnik.site
+    secretName: main-tls-secret
+  rules:
+  - host: slonnik.site
+    http:
+      paths:
+      - path: "/k8s"
+        pathType: Prefix
+        backend:
+          service:
+            name: kubernetes-dashboard
+            port:
+              number: 443
