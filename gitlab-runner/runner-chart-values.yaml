@@ -1,0 +1,5 @@
+gitlabUrl: https://gitlab.slonnik.site/
+runnerRegistrationToken: "GR13489419YRgrWsqjF2MHb5xxdBE"
+runners:
+    privileged: true
+certsSecretName: main-secret
