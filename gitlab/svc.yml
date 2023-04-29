@@ -11,3 +11,7 @@ spec:
     protocol: TCP
     port: 11443
     targetPort: 443
+  - name: docker-port
+    protocol: TCP
+    port: 11550
+    targetPort: 5050  

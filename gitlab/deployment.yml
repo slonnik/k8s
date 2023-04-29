@@ -36,7 +36,7 @@ spec:
         ports:
         - containerPort: 80
         - containerPort: 443
-        - containerPort: 5000  
+        - containerPort: 5050  
         volumeMounts:
         - mountPath: "/etc/gitlab"
           name: gitlab-pv-storage-config
