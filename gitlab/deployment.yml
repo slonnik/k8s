@@ -31,8 +31,7 @@ spec:
         #hostname: gitlab.slonnik.site
         env:
           - name: GITLAB_OMNIBUS_CONFIG
-            value: "external_url 'https://gitlab.slonnik.site';gitlab_rails['registry_enabled'] = true;gitlab_rails['initial_root_password'] = \"thas-ich-a\""
-       
+            value: "external_url 'https://gitlab.slonnik.site';gitlab_rails['registry_enabled'] = true;gitlab_rails['initial_root_password'] = \"thas-ich-a\";registry_external_url = 'https://docker.slonnik.site:443';registry_nginx['listen_https'] = true;registry_nginx['listen_port'] = 5050;registry_nginx['ssl_certificate'] = '/etc/gitlab/ssl/docker.slonnik.site.crt';registry_nginx['ssl_certificate_key'] = '/etc/gitlab/ssl/docker.slonnik.site.key'"
         ports:
         - containerPort: 80
         - containerPort: 443
