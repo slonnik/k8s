@@ -27,10 +27,7 @@ spec:
             port:
               number: 11443
               #number: 11550
-  - host: docker.slonnik.site
-    http:
-      paths:
-      - path: "/"
+      - path: "/v2"
         pathType: Prefix
         backend:
           service:
